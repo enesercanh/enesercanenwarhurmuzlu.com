@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cap or Fact</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #ff4d4f;
+    }
+
+    .game-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .statement {
+      font-size: 1.5rem;
+      margin: 20px 0;
+    }
+
+    .buttons {
+      margin: 20px 0;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .buttons .cap {
+      background-color: #ff6f61;
+      color: white;
+    }
+
+    .buttons .cap:hover {
+      background-color: #ff4d4f;
+    }
+
+    .buttons .fact {
+      background-color: #61dafb;
+      color: white;
+    }
+
+    .buttons .fact:hover {
+      background-color: #00bcd4;
+    }
+
+    .score {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .end-screen {
+      display: none;
+    }
+
+    .end-screen button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .end-screen button:hover {
+      background-color: #388e3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cap or Fact?</h1>
+  <div class="game-container">
+    <div class="game-screen">
+      <div class="statement" id="statement"></div>
+      <div class="buttons">
+        <button class="cap" onclick="chooseAnswer('Cap')">Cap</button>
+        <button class="fact" onclick="chooseAnswer('Fact')">Fact</button>
+      </div>
+      <div class="score" id="score">Score: 0</div>
+    </div>
+    <div class="end-screen" id="end-screen">
+      <h2>Your Final Score: <span id="final-score"></span></h2>
+      <button onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+
+  <script>
+    const statements = [
+      { text: "An octopus has three hearts.", answer: "Fact" },
+      { text: "Humans share 50% of their DNA with bananas.", answer: "Fact" },
+      { text: "The moon is made of cheese.", answer: "Cap" },
+      { text: "A shrimp's heart is in its head.", answer: "Fact" },
+      { text: "You can’t sneeze with your eyes open.", answer: "Cap" },
+      { text: "Watermelon is 90% water.", answer: "Fact" },
+      { text: "The Eiffel Tower can grow in height during summer.", answer: "Fact" },
+      { text: "Bats are blind.", answer: "Cap" },
+      { text: "Goldfish only have a three-second memory.", answer: "Cap" },
+      { text: "Sloths can hold their breath longer than dolphins.", answer: "Fact" }
+    ];
+
+    let currentStatementIndex = 0;
+    let score = 0;
+
+    const statementElement = document.getElementById("statement");
+    const scoreElement = document.getElementById("score");
+    const endScreen = document.getElementById("end-screen");
+    const finalScoreElement = document.getElementById("final-score");
+
+    function startGame() {
+      currentStatementIndex = 0;
+      score = 0;
+      endScreen.style.display = "none";
+      updateScore();
+      showStatement();
+    }
+
+    function showStatement() {
+      if (currentStatementIndex < statements.length) {
+        statementElement.innerText = statements[currentStatementIndex].text;
+      } else {
+        endGame();
+      }
+    }
+
+    function chooseAnswer(choice) {
+      const currentStatement = statements[currentStatementIndex];
+      if (choice === currentStatement.answer) {
+        score += 10;
+      } else {
+        score -= 5;
+      }
+      updateScore();
+      currentStatementIndex++;
+      showStatement();
+    }
+
+    function updateScore() {
+      scoreElement.innerText = `Score: ${score}`;
+    }
+
+    function endGame() {
+      finalScoreElement.innerText = score;
+      document.querySelector(".game-screen").style.display = "none";
+      endScreen.style.display = "block";
+    }
+
+    function restartGame() {
+      document.querySelector(".game-screen").style.display = "block";
+      startGame();
+    }
+
+    // Start the game when the page loads
+    startGame();
+  </script>
+</body>
+</html>
