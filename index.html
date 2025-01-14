@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enes's World</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Enes's World</h1>
+        <nav>
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="researches.html">Research Papers</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://raw.githubusercontent.com/enesercanh/my-blog/main/images/Enes_CV.pdf" download="Enes_CV.pdf">CV</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Welcome to My World</h2>
+        <p>
+            This is my personal website. Here, I share my thoughts on math, education, life, and everything. 
+            Feel free to browse around and explore the resources I've created.
+        </p>
+        
+        <!-- Subscription Form -->
+        <h3>Subscribe to my Newsletter</h3>
+        <form id="subscribeForm">
+            <label for="email">Enter your email:</label>
+            <input type="email" id="email" name="email" required placeholder="Your email address">
+            <button type="submit">Subscribe</button>
+        </form>
+        <p id="subscriptionMessage"></p>
+
+        <h3>Recent Posts</h3>
+        <ul>
+            <li><a href="post1.html">Hi!</a></li>
+            <li><a href="post2.html">Reflections</a></li>
+            <li><a href="post3.html">Chasing Adventures</a></li>
+            <li><a href="post4.html">The True Cost of Technology</a></li>
+            <li><a href="post5.html">Learning to Let Go</a></li>
+            <li><a href="post6.html">The Power of Curiosity</a></li>
+            <li><a href="post7.html">Ahmed Abo Zaid: A Catalyst for Change</a></li>
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2025 Enes All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('subscribeForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            
+            try {
+                const response = await fetch('http://localhost:5000/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('subscriptionMessage').innerText = 'Subscribed successfully! Thank you for joining.';
+                } else {
+                    document.getElementById('subscriptionMessage').innerText = data.message || 'Something went wrong.';
+                }
+            } catch (error) {
+                document.getElementById('subscriptionMessage').innerText = 'Error subscribing. Please try again later.';
+            }
+        });
+    </script>
+</body>
+</html>
