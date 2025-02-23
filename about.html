@@ -9,7 +9,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Enes</title>
-    <style>
+ <style>
+        /* Add the new CSS code here */
         .about-section {
             display: flex;
             flex-wrap: wrap;
@@ -26,6 +27,12 @@
             margin-right: 20px;
             border-radius: 50%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            object-fit: cover; /* Ensures the image fills the container properly */
+            transition: transform 0.3s ease, filter 0.3s ease; /* Smooth transition for hover effect */
+        }
+        .profile-picture:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+            filter: brightness(1.1); /* Slight brightness increase */
         }
         .about-text {
             flex: 2 1 600px;
