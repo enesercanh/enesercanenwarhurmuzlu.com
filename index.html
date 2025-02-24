@@ -30,7 +30,7 @@
         </p>
         
         <!-- Subscription Form -->
-        <h3>Subscribe to receive notification whenever I add something new to the website</h3>
+        <h3>Subscribe to receive notifications whenever I add something new to the website</h3>
         <form id="subscribeForm">
             <label for="email">Enter your email:</label>
             <input type="email" id="email" name="email" required placeholder="Your email address">
@@ -70,11 +70,12 @@
 
                 if (response.ok) {
                     document.getElementById('subscriptionMessage').innerText = 'Subscribed successfully! Thank you for joining.';
+                    document.getElementById('email').value = ''; // Clear the email input
                 } else {
-                    document.getElementById('subscriptionMessage').innerText = data.message || 'Something went wrong.';
+                    document.getElementById('subscriptionMessage').innerText = data.message || 'Something went wrong. Please try again later.';
                 }
             } catch (error) {
-                document.getElementById('subscriptionMessage').innerText = 'This feature is not deployed yet. Please try again later.';
+                document.getElementById('subscriptionMessage').innerText = 'There was an issue connecting to the server. Please try again later.';
             }
         });
     </script>
