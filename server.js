@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());  // This allows requests from different origins
 
 // Use environment variables for sensitive information
-const dbURI = process.env.MONGO_URI || 'mongodb+srv://blogAdmin:enesabdmalk@blogcluster.hmrwt.mongodb.net/?retryWrites=true&w=majority&appName=BlogCluster';
+const dbURI = process.env.MONGO_URI || '';
 
 // Connect to MongoDB
 mongoose.connect(dbURI)
