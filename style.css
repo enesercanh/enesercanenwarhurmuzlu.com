@@ -81,11 +81,11 @@ footer {
 }
 
 .social-links a {
-    color: #007acc;
+    color: #000000; /* Change this to black */
     font-size: 1.5rem;
     transition: color 0.3s ease;
 }
 
 .social-links a:hover {
-    color: #0056b3;
+    color: #333333; /* Slightly lighter black for hover effect */
 }
