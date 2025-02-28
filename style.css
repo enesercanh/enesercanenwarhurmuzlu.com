@@ -71,3 +71,21 @@ footer {
     font-size: 0.9rem;
     color: #666666;
 }
+
+/* Social Media Links */
+.social-links {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #007acc;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #0056b3;
+}
