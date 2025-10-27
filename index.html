@@ -24,6 +24,7 @@
             </ul>
         </nav>
     </header>
+
     <main>
         <h2>Welcome to My World</h2>
         <p>
@@ -33,7 +34,11 @@
         
         <!-- Subscription Form -->
         <h3>Subscribe to receive notifications whenever I add something new to the website</h3>
-        <form id="subscribeForm">
+        <form
+            action="https://formspree.io/f/xovpjnbv"
+            method="POST"
+            id="subscribeForm"
+        >
             <label for="email">Enter your email:</label>
             <input type="email" id="email" name="email" required placeholder="Your email address">
             <button type="submit">Subscribe</button>
@@ -46,6 +51,7 @@
             <li><a href="post1.html">Sacrificing</a></li>
         </ul>
     </main>
+
     <footer>
         <p>&copy; 2025 Enes. All rights reserved.</p>
         <!-- Social Media Links -->
@@ -69,29 +75,26 @@
     </footer>
 
     <script>
-        document.getElementById('subscribeForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            
-            try {
-                const response = await fetch('http://localhost:5000/subscribe', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email }),
-                });
+        // Optional: show a message after form submission without leaving the page
+        const form = document.getElementById('subscribeForm');
+        const message = document.getElementById('subscriptionMessage');
 
-                const data = await response.json();
-
-                if (response.ok) {
-                    document.getElementById('subscriptionMessage').innerText = 'Subscribed successfully! Thank you for joining.';
-                    document.getElementById('email').value = ''; // Clear the email input
-                } else {
-                    document.getElementById('subscriptionMessage').innerText = data.message || 'Something went wrong. Please try again later.';
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
                 }
-            } catch (error) {
-                document.getElementById('subscriptionMessage').innerText = 'There was an issue connecting to the server. Please try again later.';
+            });
+
+            if (response.ok) {
+                message.innerText = "Subscribed successfully! 🎉";
+                form.reset();
+            } else {
+                message.innerText = "Something went wrong. Please try again.";
             }
         });
     </script>
